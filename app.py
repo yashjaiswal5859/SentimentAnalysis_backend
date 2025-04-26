@@ -17,8 +17,11 @@ def download_from_drive(file_id, destination):
         response = session.get(URL, params=params, stream=True)
 
     save_response_content(response, destination)
+    
     print(f"Downloaded {destination}")
-
+    size_in_bytes = os.path.getsize(destination)
+    size_in_mb = size_in_bytes / (1024 * 1024)  # convert to MB
+    print(f"File size: {size_in_mb:.2f} MB")
 
 def get_confirm_token(response):
     for key, value in response.cookies.items():
