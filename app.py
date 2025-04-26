@@ -6,6 +6,21 @@ def download_from_drive(file_id, destination):
         print(f"{destination} already exists, skipping download.")
         return
     print(f"Downloading {destination}...")
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, destination, quiet=False)
+
+    # Check file size after download
+    if os.path.exists(destination):
+        size_in_bytes = os.path.getsize(destination)
+        size_in_mb = size_in_bytes / (1024 * 1024)  # convert to MB
+        if size_in_bytes == 0:
+            print(f"Error: {destination} was downloaded but is empty! ❌")
+        else:
+            print(f"Downloaded {destination} ✅")
+            print(f"File size: {size_in_mb:.2f} MB")
+    else:
+        print(f"Error: {destination} was not downloaded at all! ❌")
+    return
     URL = "https://drive.google.com/uc?export=download"
     session = requests.Session()
 
