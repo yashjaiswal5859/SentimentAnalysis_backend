@@ -6,3 +6,4 @@ pandas
 nltk
 requests
 gunicorn
+gdown
